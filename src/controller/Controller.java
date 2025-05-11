@@ -8,6 +8,13 @@ import javafx.stage.Stage;
 
 public class Controller {
 
+    private UIManager uiManager;
+
+    public void setUiManager(UIManager manager)
+    {
+        this.uiManager = manager;
+    }
+
     @FXML
     private Label title;
 
