@@ -1,4 +1,4 @@
-package Reporting;
+package reporting;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

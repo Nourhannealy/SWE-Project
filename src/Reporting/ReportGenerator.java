@@ -1,4 +1,4 @@
-package Reporting;
+package reporting;
 
 import db.DatabaseManager;
 import javafx.fxml.FXML;
