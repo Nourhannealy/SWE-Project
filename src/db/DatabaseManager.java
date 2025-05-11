@@ -11,7 +11,7 @@ public class DatabaseManager
     private static String db = "jdbc:sqlite:resources/db/system.db";
     private static Connection connection;
 
-    public static boolean connect()
+    public static Connection connect()
     {
         try 
         {
@@ -39,25 +39,26 @@ public class DatabaseManager
                                                 "asset_id INTEGER, " + 
                                                 "amount INT NOT NULL, " +
                                                 "FOREIGN KEY (user_id) REFERENCES users(id), " + 
-                                                "FOREIGN KEY (asset_id) REFERENCES assets(id));";;
+                                                "FOREIGN KEY (asset_id) REFERENCES assets(id));";
+
 
                 statement.executeUpdate(createTableAssets);
                 statement.executeUpdate(createTableUsers);
                 statement.executeUpdate(createTableOwnedAssets);
+
+                statement.close();
                     
-
                 System.out.println("CREATED !!!");
-
-                return true;
             }
 
-            return false;
+            return connection;
 
         }
         catch (SQLException e)
         {
             System.err.println("Error: " + e.getMessage());
-            return false;
+
+            return null;
         }
     }
 
@@ -67,6 +68,7 @@ public class DatabaseManager
             if (connection != null && !connection.isClosed()) 
             {
                 connection.close();
+                connection = null;
                 System.out.println("Disconnected !");
             }
         } 
