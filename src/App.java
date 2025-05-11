@@ -19,8 +19,8 @@ public class App extends Application {
         Parent root;
         try {
             // This is just a basic program used while testing 
-            System.out.println(getClass().getResource("/views/transactions.fxml"));
-            root = FXMLLoader.load(getClass().getResource("/views/transactions.fxml"));
+            System.out.println(getClass().getResource("/views/signup.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/views/signup.fxml"));
 
             Scene scene = new Scene(root);
         
