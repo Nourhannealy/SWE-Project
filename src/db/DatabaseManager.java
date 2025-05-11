@@ -39,7 +39,8 @@ public class DatabaseManager
                                                 "asset_id INTEGER, " + 
                                                 "amount INT NOT NULL, " +
                                                 "FOREIGN KEY (user_id) REFERENCES users(id), " + 
-                                                "FOREIGN KEY (asset_id) REFERENCES assets(id));";;
+                                                "FOREIGN KEY (asset_id) REFERENCES assets(id));";
+
 
                 statement.executeUpdate(createTableAssets);
                 statement.executeUpdate(createTableUsers);
@@ -69,6 +70,7 @@ public class DatabaseManager
             if (connection != null && !connection.isClosed()) 
             {
                 connection.close();
+                connection = null;
                 System.out.println("Disconnected !");
             }
         } 
