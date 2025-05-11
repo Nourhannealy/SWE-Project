@@ -1,5 +1,11 @@
 package controller;
 
+import java.sql.SQLException;
+
+import model.AssetManager;
+import model.AssetHistoryManager;
+import model.OwnedAssetsManager;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,6 +15,17 @@ import javafx.stage.Stage;
 public class Controller {
 
     private UIManager uiManager;
+    private OwnedAssetsManager ownedAssetsManager;
+    private AssetHistoryManager assetHistoryManager;
+    private AssetManager assetManager;
+
+    public void setDatabase() throws SQLException
+    {
+        this.ownedAssetsManager = new OwnedAssetsManager();
+        this.assetHistoryManager = new AssetHistoryManager();
+        this.assetManager = new AssetManager();
+    }
+
 
     public void setUiManager(UIManager manager)
     {
