@@ -1,13 +1,11 @@
-import java.io.IOException;
-import java.sql.Connection;
 
-import db.DatabaseManager;
+import controller.UIManager;
 import javafx.application.Application;
 // import javafx.event.ActionEvent;
 // import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+// import javafx.fxml.FXMLLoader;
+// import javafx.scene.Parent;
+// import javafx.scene.Scene;
 // import javafx.scene.control.Button;
 // import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -16,20 +14,25 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        Parent root;
         try {
             // This is just a basic program used while testing 
-            System.out.println(getClass().getResource("/views/signup.fxml"));
-            root = FXMLLoader.load(getClass().getResource("/views/signup.fxml"));
+            // root = FXMLLoader.load(getClass().getResource("/views/mainWindow.fxml"));
+            // DatabaseManager.connect();
 
-            Scene scene = new Scene(root);
+            // Scene scene = new Scene(root);
         
-            primaryStage.setTitle("Signup");
-            primaryStage.setScene(scene);
-            primaryStage.show();
+            // primaryStage.setTitle("Hello World!");
+            // primaryStage.setScene(scene);
+            // primaryStage.show();
+            UIManager uiManager = new UIManager(primaryStage);
+            uiManager.showMainView();
 
-        } catch (IOException e) {
-            System.out.println("OPS");
+        } catch (Exception e) {
+            // System.out.println("OPS");
+            // e.printStackTrace();
+            // System.out.println("FXML file location: " + getClass().getClassLoader().getResource("views/mainWindow.fxml"));
+            System.err.println("Error: " + e);
+
         }
   
     }
