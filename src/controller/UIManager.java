@@ -4,15 +4,14 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import java.io.IOException;
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
-import model.AssetManager;
-import transactions.AssetHistoryController;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,13 +20,14 @@ import java.sql.Statement;
 
 import Users.signupController;
 import db.DatabaseManager;
+import transactions.AssetHistoryController;
+import controller.Controller;
+import model.AssetManager;
+
 
 public class UIManager {
-
     private Stage stage;
     private Controller controller;
-    private signupController signupController;
-    private AssetHistoryController assetHistoryController;
 
     public UIManager(Stage primaryStage)
     {
@@ -69,7 +69,7 @@ public class UIManager {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/signup.fxml"));
             Parent root = loader.load();
 
-            this.signupController = loader.getController();
+            signupController signupController = loader.getController();
             
             stage.setScene(new Scene(root));
             stage.setTitle("Investment Manager - Signup");
@@ -95,10 +95,10 @@ public class UIManager {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/transactions.fxml"));
             Parent root = loader.load();
 
-            this.assetHistoryController = loader.getController();
-            this.assetHistoryController.setAssetManager(controller.getAssetManager());
-            this.assetHistoryController.setOwnedAssetManager(controller.getOwnedAssetsManager());
-            this.assetHistoryController.setAssetHistoryManager(controller.getAssetHistoryManager());
+            AssetHistoryController assetHistoryController = loader.getController();
+            assetHistoryController.setAssetManager(controller.getAssetManager());
+            assetHistoryController.setOwnedAssetManager(controller.getOwnedAssetsManager());
+            assetHistoryController.setAssetHistoryManager(controller.getAssetHistoryManager());
             
             stage.setScene(new Scene(root));
             stage.setTitle("Investment Manager - Transactions");
@@ -147,6 +147,5 @@ public class UIManager {
 
         assets_name.setItems(items);
     }
-
 
 }

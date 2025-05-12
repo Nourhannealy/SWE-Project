@@ -11,7 +11,7 @@ public class DatabaseManager
     private static String db = "jdbc:sqlite:resources/db/system.db";
     private static Connection connection;
 
-    public static Connection connect()
+    public static Connection connect() throws SQLException
     {
         try 
         {
@@ -57,15 +57,17 @@ public class DatabaseManager
                 statement.close();
                     
                 System.out.println("CREATED !!!");
+                return connection;
+            }
+            else
+            {
+                throw new SQLException("Couldn't connect to the db");
             }
 
-            return connection;
-
         }
-        catch (SQLException e)
+        catch (SQLException e) 
         {
             System.err.println("Error: " + e.getMessage());
-
             return null;
         }
     }

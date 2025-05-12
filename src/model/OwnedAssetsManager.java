@@ -34,7 +34,7 @@ public class OwnedAssetsManager extends DatabaseManager {
 
     public void addAsset(int userId, int assetId, double amount) throws SQLException
     {
-        String sql = "INSERT INTO owned_assets (user_id, asset_id, amount) VALUES (?,?,?);";
+        String sql = "INSERT INTO owned_assets (user_id, asset_id, amount) VALUES (?,?,?)";
 
         try (PreparedStatement pstmt = db_connection.prepareStatement(sql)) 
         {
@@ -107,8 +107,6 @@ public class OwnedAssetsManager extends DatabaseManager {
             }
         }
 
-    }
-
-        
+    }        
 }
     

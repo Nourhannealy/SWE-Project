@@ -6,6 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import db.DatabaseManager;
+import java.sql.SQLException;
+
+import db.DatabaseManager;
+import model.OwnedAssetsManager;
 
 public class AssetHistoryManager extends DatabaseManager{
     
