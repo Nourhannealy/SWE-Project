@@ -11,15 +11,14 @@ import java.sql.SQLException;
 import db.DatabaseManager;
 import model.OwnedAssetsManager;
 
-public class AssetHistoryManager extends DatabaseManager{
+public class AssetHistoryManager{
     
     private Connection db_connection;
     private OwnedAssetsManager OwnedsAssetsM;
 
     public AssetHistoryManager() throws SQLException
     {
-        System.out.println("AssetHistory");
-        this.db_connection = connect();
+        this.db_connection = DatabaseManager.connect();
     }
 
     public void setOwnedAssetsManager(OwnedAssetsManager OAM)

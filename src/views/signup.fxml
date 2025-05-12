@@ -9,32 +9,32 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Users.signupController">
    <children>
-      <Label layoutX="151.0" layoutY="112.0" text="Username:">
+      <Label layoutX="151.0" layoutY="83.0" text="Username:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="151.0" layoutY="148.0" text="Email:">
+      <Label layoutX="151.0" layoutY="119.0" text="Email:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="151.0" layoutY="187.0" text="Password:">
+      <Label layoutX="151.0" layoutY="158.0" text="Password:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="151.0" layoutY="230.0" text="Confirm password:">
+      <Label layoutX="151.0" layoutY="201.0" text="Confirm password:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
       <Label layoutX="25.0" layoutY="23.0" />
-      <PasswordField fx:id="password" layoutX="291.0" layoutY="187.0" />
-      <PasswordField fx:id="confirm_password" layoutX="291.0" layoutY="230.0" />
-      <Button fx:id="signup" layoutX="256.0" layoutY="352.0" mnemonicParsing="false" onAction="#signup" text="Signup" />
-      <TextField fx:id="username" layoutX="291.0" layoutY="112.0" />
-      <TextField fx:id="email" layoutX="291.0" layoutY="148.0" />
-      <Label fx:id="message" layoutX="48.0" layoutY="294.0" prefHeight="26.0" prefWidth="469.0" textAlignment="CENTER" textFill="RED" />
+      <PasswordField fx:id="password" layoutX="291.0" layoutY="158.0" />
+      <PasswordField fx:id="confirm_password" layoutX="291.0" layoutY="201.0" />
+      <Button fx:id="signup" layoutX="256.0" layoutY="307.0" mnemonicParsing="false" onAction="#signup" text="Sign Up" />
+      <TextField fx:id="username" layoutX="291.0" layoutY="83.0" />
+      <TextField fx:id="email" layoutX="291.0" layoutY="119.0" />
+      <Label fx:id="message" layoutX="50.0" layoutY="256.0" prefHeight="26.0" prefWidth="469.0" textAlignment="CENTER" textFill="RED" />
    </children>
 </AnchorPane>

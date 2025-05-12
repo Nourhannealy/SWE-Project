@@ -7,13 +7,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OwnedAssetsManager extends DatabaseManager {
+public class OwnedAssetsManager {
 
     private Connection db_connection;
 
     public OwnedAssetsManager() throws SQLException
     {
-        this.db_connection = connect();
+        this.db_connection = DatabaseManager.connect();
     }
 
     public boolean isAssetOwned(int userId, int assetId) throws SQLException
@@ -50,6 +50,17 @@ public class OwnedAssetsManager extends DatabaseManager {
         }
 
     }
+
+    // public void main(String[] args)
+    // {
+    //     try{
+    //         addAsset(1, 1, 5);
+    //         System.out.println("Success");
+    //     }catch (Exception e){
+    //         System.err.println("Couldn't add asset");
+    //         System.err.println(e.getMessage());
+    //     }
+    // }
 
     public void editAsset(int userId, int assetId, double amount) throws SQLException
     {

@@ -12,9 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
 
-public class Controller {
+public class Controller extends BaseController{
 
-    private UIManager uiManager;
     private OwnedAssetsManager ownedAssetsManager;
     private AssetHistoryManager assetHistoryManager;
     private AssetManager assetManager;
@@ -41,11 +40,6 @@ public class Controller {
         return this.assetHistoryManager;
     }
 
-    public void setUiManager(UIManager manager)
-    {
-        this.uiManager = manager;
-    }
-
     @FXML
     private Label InvestmentManagerLabel;
 
@@ -59,6 +53,12 @@ public class Controller {
     void SignUpbtnClicked(MouseEvent event) 
     {
         uiManager.switchToSignUp();
+    }
+
+    @FXML
+    void logInBtnClicked(MouseEvent event) 
+    {
+        uiManager.switchToLogIn();
     }
 
 }

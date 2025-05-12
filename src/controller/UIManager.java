@@ -2,15 +2,23 @@ package controller;
 
 import db.DatabaseManager;
 import controller.Controller;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import Users.LoginController;
 import Users.signupController;
 import model.AssetManager;
 import Users.signupController;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
 
@@ -57,6 +65,37 @@ public class UIManager {
         }
     }
 
+    public static void populateTransactionTypes(ComboBox<String> transaction_type) 
+    {
+        transaction_type.getItems().addAll("Sell", "Buy");
+    }
+
+    public static void addAssetForm(ComboBox<String> assets_name, ResultSet allAssets)
+        throws SQLException
+    {
+
+        ObservableList<String> items = FXCollections.observableArrayList();
+        while (allAssets.next()) {
+            String item = allAssets.getString("name");
+            items.add(item);
+        }
+
+        assets_name.setItems(items);
+    }
+
+    public static void editAssetForm(ComboBox<String> assets_name, ResultSet allAssets)
+        throws SQLException
+    {
+
+        ObservableList<String> items = FXCollections.observableArrayList();
+        while (allAssets.next()) {
+            String item = allAssets.getString("name");
+            items.add(item);
+        }
+
+        assets_name.setItems(items);
+    }
+
     public void switchToSignUp()
     {
         try
@@ -65,13 +104,32 @@ public class UIManager {
             Parent root = loader.load();
             signupController signUpCtrl = loader.getController();
 
-            // 3. Switch scene
+            // Switching the view
             stage.setScene(new Scene(root));
             stage.show();
         }
         catch(Exception e)
         {
-            errorMessage("Sign Up error", "Unable to set controller", e);
+            errorMessage("Sign Up Error", "Unable to set controller", e);
         }
+    }
+
+    public void switchToLogIn()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/LOGIN.fxml"));
+            Parent root = loader.load();
+            LoginController loginctrl = loader.getController();
+
+            // Switching the view
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch(Exception e)
+        {
+            errorMessage("Log in Error", "Unable to set controller", e);
+        }
+        
     }
 }

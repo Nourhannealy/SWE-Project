@@ -10,13 +10,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collections;
 
-public class AssetManager extends DatabaseManager {
+public class AssetManager {
 
     private Connection db_connection;
 
     public AssetManager() throws SQLException
     {
-        this.db_connection = connect();
+        this.db_connection = DatabaseManager.connect();
     }
 
     // Caller must close pstmt and resultset

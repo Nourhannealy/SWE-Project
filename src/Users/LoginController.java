@@ -2,7 +2,7 @@ package Users;
 
 import java.sql.SQLException;
 
-import javafx.application.Application;
+import controller.BaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -11,7 +11,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 
-public class LoginController {
+public class LoginController extends BaseController {
+
 
     @FXML
     private Button login;
@@ -24,29 +25,34 @@ public class LoginController {
 
     @FXML
     void Login(ActionEvent event) throws SQLException {
-        String entered_Username=username.getText();
-        String entered_Password=password.getText();
-        UserLogin login = new UserLogin();
-        boolean successfullLogin =login.validataLoginCredentials(entered_Username, entered_Password);
-        
-        Alert alert;
+        try 
+        {
+            String entered_Username=username.getText();
+            String entered_Password=password.getText();
+            UserLogin login = new UserLogin();
+            boolean successfullLogin =login.validataLoginCredentials(entered_Username, entered_Password);
+            
+            Alert alert;
 
-        if(successfullLogin){
-            alert =new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Login Successful");
-            alert.setHeaderText(null);
-            alert.setContentText("Welcome, "+entered_Username+ "!");
+            if(successfullLogin){
+                alert =new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Login Successful");
+                alert.setHeaderText(null);
+                alert.setContentText("Welcome, "+entered_Username+ "!");
 
 
+            }
+            else{
+                alert =new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Login Failed");
+                alert.setHeaderText(null);
+                alert.setContentText("Invalid username or password.");
+            }   
+
+            alert.showAndWait();
+        } catch (Exception e) {
+            errorMessage("Database Error", "Couldn't connect/modify db", e);
         }
-        else{
-            alert =new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Login Failed");
-            alert.setHeaderText(null);
-            alert.setContentText("Invalid username or password.");
-        }   
-
-        alert.showAndWait();
     }
 
 }

@@ -14,14 +14,14 @@ public class UserLogin {
         this.connection = DatabaseManager.connect();
     }
 
-    public boolean validataLoginCredentials(String username, String password){
+    public boolean validataLoginCredentials(String username, String password) throws SQLException{
         String S_username= fetchUsernameFromDb(username);
         if(S_username  == null){
             System.out.println("Username not found");// for debging
             return false;
         }
 
-        String S_Password=fetchPasswordFromDb(username);
+        String S_Password = fetchPasswordFromDb(username);
         if(password.equals(S_Password)){
             System.out.println("Login successful");
             return true;
@@ -33,46 +33,32 @@ public class UserLogin {
     }
     
 
-    private String fetchUsernameFromDb(String username) {
-        String url = "jdbc:sqlite:resources/db/system.db";
+    private String fetchUsernameFromDb(String username) throws SQLException {
         String query = "SELECT username FROM users WHERE username = ?";
-
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-
+        
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            
             pstmt.setString(1, username);
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                return rs.getString("username");
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getString("username");
+                }
             }
-
-        } catch (SQLException e) {
-            System.out.println("Database error: " + e.getMessage());
         }
-
         return null;
     }
 
-    private String fetchPasswordFromDb(String username) {
-        String url = "jdbc:sqlite:resources/db/system.db";
-        String query = "SELECT password FROM users WHERE username = ?";
-
-        try (Connection conn = DriverManager.getConnection(url);
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-
+    private String fetchPasswordFromDb(String username) throws SQLException {
+        String query = "SELECT password FROM users WHERE username = ? LIMIT 1";
+        
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            
             pstmt.setString(1, username);
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                return rs.getString("password");
+            
+            try (ResultSet rs = pstmt.executeQuery()) {
+                return rs.next() ? rs.getString("password") : null;
             }
-
-        } catch (SQLException e) {
-            System.out.println("Database error: " + e.getMessage());
         }
-
-        return null;
     }
    
 }
