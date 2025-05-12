@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.sql.Connection;
 
+import controller.UIManager;
 import db.DatabaseManager;
 import javafx.application.Application;
 // import javafx.event.ActionEvent;
@@ -16,22 +17,9 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        Parent root;
-        try {
-            // This is just a basic program used while testing 
-            System.out.println(getClass().getResource("/views/signup.fxml"));
-            root = FXMLLoader.load(getClass().getResource("/views/signup.fxml"));
-
-            Scene scene = new Scene(root);
-        
-            primaryStage.setTitle("Signup");
-            primaryStage.setScene(scene);
-            primaryStage.show();
-
-        } catch (IOException e) {
-            System.out.println("OPS");
-        }
-  
+        UIManager uibla = new UIManager(primaryStage);
+        uibla.showMainView();
+        uibla.showTransactionsView();
     }
  
     public static void main(String[] args) {

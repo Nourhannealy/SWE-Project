@@ -1,5 +1,152 @@
 package controller;
 
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
+import javafx.stage.Stage;
+import model.AssetManager;
+import transactions.AssetHistoryController;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import Users.signupController;
+import db.DatabaseManager;
+
 public class UIManager {
-    
+
+    private Stage stage;
+    private Controller controller;
+    private signupController signupController;
+    private AssetHistoryController assetHistoryController;
+
+    public UIManager(Stage primaryStage)
+    {
+        this.stage = primaryStage;
+    }
+
+    public void showMainView() {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/mainWindow.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller and inject UIManager or other data
+            this.controller = loader.getController();
+            this.controller.setUiManager(this);
+            this.controller.setDatabase();
+
+            stage.setScene(new Scene(root));
+            stage.setTitle("Investment Manager");
+            stage.show();
+        }
+        catch (Exception e)
+        {
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Database Error");
+                alert.setContentText("Failed to connect to the database.");
+                alert.showAndWait();
+                // Close JavaFX application
+                Platform.exit();
+            });
+        }
+    }
+
+    public void showSignupView()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/signup.fxml"));
+            Parent root = loader.load();
+
+            this.signupController = loader.getController();
+            
+            stage.setScene(new Scene(root));
+            stage.setTitle("Investment Manager - Signup");
+            stage.show();
+        }
+        catch (Exception e)
+        {
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Database Error");
+                alert.setContentText("Failed to connect to the database.");
+                alert.showAndWait();
+                // Close JavaFX application
+                Platform.exit();
+            });
+        }
+    }
+
+    public void showTransactionsView()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/transactions.fxml"));
+            Parent root = loader.load();
+
+            this.assetHistoryController = loader.getController();
+            this.assetHistoryController.setAssetManager(controller.getAssetManager());
+            this.assetHistoryController.setOwnedAssetManager(controller.getOwnedAssetsManager());
+            this.assetHistoryController.setAssetHistoryManager(controller.getAssetHistoryManager());
+            
+            stage.setScene(new Scene(root));
+            stage.setTitle("Investment Manager - Transactions");
+            stage.show();
+        }
+        catch (Exception e)
+        {
+            Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Database Error");
+                alert.setContentText("Failed to connect to the database.");
+                alert.showAndWait();
+                // Close JavaFX application
+                Platform.exit();
+            });
+        }
+    }
+
+    public static void populateTransactionTypes(ComboBox<String> transaction_type) 
+    {
+        transaction_type.getItems().addAll("Sell", "Buy");
+    }
+
+    public static void addAssetForm(ComboBox<String> assets_name, ResultSet allAssets)
+        throws SQLException
+    {
+
+        ObservableList<String> items = FXCollections.observableArrayList();
+        while (allAssets.next()) {
+            String item = allAssets.getString("name");
+            items.add(item);
+        }
+
+        assets_name.setItems(items);
+    }
+
+    public static void editAssetForm(ComboBox<String> assets_name, ResultSet allAssets)
+        throws SQLException
+    {
+
+        ObservableList<String> items = FXCollections.observableArrayList();
+        while (allAssets.next()) {
+            String item = allAssets.getString("name");
+            items.add(item);
+        }
+
+        assets_name.setItems(items);
+    }
+
+
 }
