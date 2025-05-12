@@ -1,4 +1,4 @@
-package reporting;
+package Reporting;
 
 import db.DatabaseManager;
 import javafx.fxml.FXML;
@@ -12,6 +12,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 
+
+
+
 public class ReportGenerator {
 
     @FXML
@@ -19,6 +22,9 @@ public class ReportGenerator {
 
     @FXML
     private Button save;
+
+    @FXML
+    private Button SaveExcel;
 
     private int userId;
 
@@ -117,4 +123,62 @@ public class ReportGenerator {
             }
         }
     }
+
+    @FXML
+    private void GenerateEXCEL() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Report as CSV");
+        fileChooser.getExtensionFilters().add(
+            new FileChooser.ExtensionFilter("CSV Files", "*.csv")
+        );
+        fileChooser.setInitialFileName("investment_report.csv");
+
+        File file = fileChooser.showSaveDialog(new Stage());
+
+        if (file != null) {
+            try (Connection conn = DatabaseManager.connect();
+                FileWriter writer = new FileWriter(file)) {
+
+                if (conn == null) {
+                    System.err.println("Failed to connect to the database.");
+                    return;
+                }
+
+                String query = "SELECT users.username, assets.name, assets.type, assets.price, owned_assets.amount " +
+                            "FROM owned_assets " +
+                            "JOIN assets ON owned_assets.asset_id = assets.id " +
+                            "JOIN users ON owned_assets.user_id = users.id " +
+                            "WHERE owned_assets.user_id = ?";
+
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setInt(1, userId); // Use actual userId
+                ResultSet rs = stmt.executeQuery();
+
+                // Write CSV header
+                writer.write("Username,Asset Name,Type,Price,Amount,Value\n");
+
+                while (rs.next()) {
+                    String username = rs.getString("username");
+                    String name = rs.getString("name");
+                    String type = rs.getString("type");
+                    double price = rs.getDouble("price");
+                    int amount = rs.getInt("amount");
+                    double value = price * amount;
+
+                    // CSV line
+                    writer.write(String.format("%s,%s,%s,%.2f,%d,%.2f\n",
+                            username, name, type, price, amount, value));
+                }
+
+                System.out.println("CSV report saved to: " + file.getAbsolutePath());
+
+            } catch (IOException | SQLException e) {
+                System.err.println("Failed to save CSV: " + e.getMessage());
+            }
+        }
+    }
+
+
+
+
 }
