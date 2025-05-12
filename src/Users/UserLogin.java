@@ -9,7 +9,12 @@ public class UserLogin {
 
 
 
-    private Connection connection = DatabaseManager.connect();
+    private Connection connection;
+
+    public UserLogin() throws SQLException 
+    {
+        this.connection = DatabaseManager.connect();
+    }
 
     public boolean validataLoginCredentials(String username, String password){
         String S_username= fetchUsernameFromDb(username);

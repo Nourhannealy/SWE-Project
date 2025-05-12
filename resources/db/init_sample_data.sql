@@ -22,7 +22,7 @@ CREATE TABLE users (
 CREATE TABLE owned_assets (
     user_id INTEGER,
     asset_id INTEGER,
-    amount INT NOT NULL,
+    amount DOUBLE NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (asset_id) REFERENCES assets(id)
 );
