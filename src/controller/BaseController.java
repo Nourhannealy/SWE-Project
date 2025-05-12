@@ -1,12 +1,26 @@
 package controller;
 
-import controller.UIManager;
+import java.sql.SQLException;
+
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
+import model.AssetHistoryManager;
+import model.AssetManager;
+import model.OwnedAssetsManager;
 
 public class BaseController {
     
-    protected UIManager uiManager;
+    protected static UIManager uiManager;
+    protected static OwnedAssetsManager ownedAssetsManager;
+    protected static AssetHistoryManager assetHistoryManager;
+    protected static AssetManager assetManager;
+
+    public static void setDatabase() throws SQLException
+    {
+        BaseController.ownedAssetsManager = new OwnedAssetsManager();
+        BaseController.assetHistoryManager = new AssetHistoryManager();
+        BaseController.assetManager = new AssetManager();
+    }
 
     public void errorMessage(String title, String details, Exception e)
     {
@@ -21,9 +35,9 @@ public class BaseController {
 
     }
 
-    public void setUiManager(UIManager manager)
+    public static void setUiManager(UIManager manager)
     {
-        this.uiManager = manager;
+        BaseController.uiManager = manager;
     }
 
 

@@ -42,8 +42,8 @@ public class UserSignUp extends UserManager{
         }
 
 
-        return /*isValidUsername(usernameInput) && isValidPassword(passwordInput)
-            &&*/ !usernameExists && !emailExists && password.equals(confirmPassword);
+        return isValidUsername(username) && isValidPassword(password)
+            && !usernameExists && !emailExists && password.equals(confirmPassword);
 
           
     } 

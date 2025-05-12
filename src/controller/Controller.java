@@ -14,30 +14,20 @@ import javafx.scene.input.MouseEvent;
 
 public class Controller extends BaseController{
 
-    private OwnedAssetsManager ownedAssetsManager;
-    private AssetHistoryManager assetHistoryManager;
-    private AssetManager assetManager;
-
-    public void setDatabase() throws SQLException
-    {
-        this.ownedAssetsManager = new OwnedAssetsManager();
-        this.assetHistoryManager = new AssetHistoryManager();
-        this.assetManager = new AssetManager();
-    }
 
     public OwnedAssetsManager getOwnedAssetsManager()
     {
-        return this.ownedAssetsManager;
+        return BaseController.ownedAssetsManager;
     }
 
     public AssetManager getAssetManager()
     {
-        return this.assetManager;
+        return BaseController.assetManager;
     }
 
     public AssetHistoryManager getAssetHistoryManager()
     {
-        return this.assetHistoryManager;
+        return BaseController.assetHistoryManager;
     }
 
     @FXML

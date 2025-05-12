@@ -52,8 +52,8 @@ public class UIManager {
 
             // Get the controller and inject UIManager or other data
             this.controller = loader.getController();
-            this.controller.setUiManager(this);
-            this.controller.setDatabase();
+            BaseController.setUiManager(this);
+            BaseController.setDatabase();
 
             stage.setScene(new Scene(root));
             stage.setTitle("Investment Manager");
@@ -131,5 +131,28 @@ public class UIManager {
             errorMessage("Log in Error", "Unable to set controller", e);
         }
         
+    }
+
+    public void display()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/menu.fxml"));
+            Parent root = loader.load();
+            MenuController menuCtrl = loader.getController();
+
+            // Switching the view
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch(Exception e)
+        {
+            errorMessage("Display Error", "Unable to set controller", e);
+        } 
+    }
+
+    public void switchToAdd()
+    {
+
     }
 }
