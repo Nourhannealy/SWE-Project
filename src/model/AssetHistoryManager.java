@@ -32,7 +32,7 @@ public class AssetHistoryManager extends DatabaseManager{
         throws SQLException
     {
         String addTransaction = "INSERT INTO assets_history (user_id, asset_id, transaction_type, amount)" + 
-                                "VALUES (?, ?, ?, ?);";
+                                "VALUES (?, ?, ?, ?)";
         String assetIdQ = "SELECT id FROM assets WHERE name = ?;" ;
 
         PreparedStatement pstmnt1 = db_connection.prepareStatement(assetIdQ);
@@ -62,7 +62,7 @@ public class AssetHistoryManager extends DatabaseManager{
     public ResultSet getAllTransactions(int userId) 
         throws SQLException
     {
-        String allTransactionsQ = "SELECT * FROM asset_history WHERE user_id = ?;";
+        String allTransactionsQ = "SELECT * FROM asset_history WHERE user_id = ?";
 
         PreparedStatement pstmnt = db_connection.prepareStatement(allTransactionsQ);
         ResultSet allTransactions = pstmnt.executeQuery();

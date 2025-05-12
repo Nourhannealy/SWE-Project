@@ -6,11 +6,8 @@ import model.AssetManager;
 import model.AssetHistoryManager;
 import model.OwnedAssetsManager;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 
