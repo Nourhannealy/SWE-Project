@@ -14,11 +14,13 @@ public class AssetHistoryManager extends DatabaseManager{
 
     public AssetHistoryManager() throws SQLException
     {
+        System.out.println("AssetHistory");
         this.db_connection = connect();
     }
 
     public void setOwnedAssetsManager(OwnedAssetsManager OAM)
     {
+        System.out.println("setOwnedAssetsManager");
         this.OwnedsAssetsM = OAM;
     }
  

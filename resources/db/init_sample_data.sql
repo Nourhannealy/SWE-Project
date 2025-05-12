@@ -2,7 +2,7 @@
 DROP TABLE IF EXISTS owned_assets;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS assets;
-DROP TABLE IF EXISTS sqlite_sequence;
+DROP TABLE IF EXISTS assets_history;
 
 -- CREATE TABLES
 CREATE TABLE assets (
@@ -23,6 +23,15 @@ CREATE TABLE owned_assets (
     user_id INTEGER,
     asset_id INTEGER,
     amount DOUBLE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (asset_id) REFERENCES assets(id)
+);
+
+CREATE TABLE assets_history (
+    user_id INTEGER,
+    asset_id INTEGER,
+    transaction_type TEXT CHECK (transaction_type IN ('BUY', 'SELL')),
+    amount INT,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (asset_id) REFERENCES assets(id)
 );
@@ -77,3 +86,29 @@ INSERT INTO owned_assets (user_id, asset_id, amount) VALUES
 (3, 11, 2),
 (3, 12, 6),
 (3, 15, 3);
+
+-- Alice (user_id = 1)
+INSERT INTO assets_history (user_id, asset_id, transaction_type, amount) VALUES
+(1, 1, 'BUY', 10),
+(1, 2, 'BUY', 1),
+(1, 6, 'BUY', 15),
+(1, 8, 'BUY', 3),
+(1, 10, 'BUY', 5),
+(1, 2, 'SELL', 0.5);  -- She now holds 0.5 BTC
+
+-- Bob (user_id = 2)
+INSERT INTO assets_history (user_id, asset_id, transaction_type, amount) VALUES
+(2, 3, 'BUY', 20),
+(2, 5, 'BUY', 2),
+(2, 5, 'SELL', 0.8),  -- Now owns 1.2
+(2, 7, 'BUY', 4),
+(2, 9, 'BUY', 8),
+(2, 14, 'BUY', 25);
+
+-- Charlie (user_id = 3)
+INSERT INTO assets_history (user_id, asset_id, transaction_type, amount) VALUES
+(3, 4, 'BUY', 5),
+(3, 2, 'BUY', 0.1),
+(3, 11, 'BUY', 2),
+(3, 12, 'BUY', 6),
+(3, 15, 'BUY', 3);

@@ -11,6 +11,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+
 
 public class Controller {
 
@@ -33,16 +36,19 @@ public class Controller {
     }
 
     @FXML
-    private Label title;
+    private Label InvestmentManagerLabel;
 
     @FXML
-    private TextField txTitle;
+    private Button LogInButton;
 
     @FXML
-    void btnClicked(ActionEvent event) {
-        Stage mainWindow = (Stage) txTitle.getScene().getWindow();
-        String title = txTitle.getText();
-        mainWindow.setTitle(title); 
+    private Button SignUpButton;
+
+     @FXML
+    void SignUpbtnClicked(MouseEvent event) 
+    {
+        uiManager.switchToSignUp();
     }
+
 
 }

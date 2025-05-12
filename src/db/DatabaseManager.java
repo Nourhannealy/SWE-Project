@@ -41,10 +41,21 @@ public class DatabaseManager
                                                 "FOREIGN KEY (user_id) REFERENCES users(id), " + 
                                                 "FOREIGN KEY (asset_id) REFERENCES assets(id));";
 
+                String createTableAssetsHistory = "CREATE TABLE IF NOT EXISTS assets_history (" + 
+                                                    "user_id INTEGER, " + 
+                                                    "asset_id INTEGER, " + 
+                                                    "transaction_type TEXT, " + 
+                                                    "amount INT," +
+                                                    "FOREIGN KEY (user_id) REFERENCES users(id)" +
+                                                    "FOREIGN KEY (asset_id) REFERENCES assets(id));";
+
 
                 statement.executeUpdate(createTableAssets);
                 statement.executeUpdate(createTableUsers);
                 statement.executeUpdate(createTableOwnedAssets);
+                statement.executeUpdate(createTableAssetsHistory);
+
+                statement.close();
                     
 
                 // System.out.println("CREATED !!!");
