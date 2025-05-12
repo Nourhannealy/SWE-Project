@@ -49,7 +49,6 @@ public class DatabaseManager
                                                     "FOREIGN KEY (user_id) REFERENCES users(id)" +
                                                     "FOREIGN KEY (asset_id) REFERENCES assets(id));";
 
-
                 statement.executeUpdate(createTableAssets);
                 statement.executeUpdate(createTableUsers);
                 statement.executeUpdate(createTableOwnedAssets);
@@ -57,10 +56,8 @@ public class DatabaseManager
 
                 statement.close();
                     
-
-                // System.out.println("CREATED !!!");
+                System.out.println("CREATED !!!");
                 return connection;
-
             }
             else
             {
@@ -68,7 +65,7 @@ public class DatabaseManager
             }
 
         }
-        catch (SQLException e)
+        catch (SQLException e) 
         {
             System.err.println("Error: " + e.getMessage());
             return null;

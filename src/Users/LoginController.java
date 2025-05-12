@@ -1,5 +1,7 @@
 package Users;
 
+import java.sql.SQLException;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +23,7 @@ public class LoginController {
     private TextField username;
 
     @FXML
-    void Login(ActionEvent event) {
+    void Login(ActionEvent event) throws SQLException {
         String entered_Username=username.getText();
         String entered_Password=password.getText();
         UserLogin login = new UserLogin();

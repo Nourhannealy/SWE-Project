@@ -81,6 +81,16 @@ public class OwnedAssetsManager extends DatabaseManager {
         
     }
 
+    public ResultSet getAllOwnedAssetsNames(int userId) throws SQLException
+    {
+        String sql = "SELECT name FROM assets WHERE assets.id IN (SELECT asset_id FROM owned_assets WHERE user_id = ?);";
+        PreparedStatement pstmt = db_connection.prepareStatement(sql);
+        
+        pstmt.setInt(1, userId);
+        return pstmt.executeQuery();
+        
+    }
+
     public void deleteAsset(int userId, int assetId) throws SQLException
     {
         String sql_Update = "DELETE FROM owned_assets WHERE user_id = ? AND asset_id = ?";
@@ -97,8 +107,6 @@ public class OwnedAssetsManager extends DatabaseManager {
             }
         }
 
-    }
-
-        
+    }        
 }
     

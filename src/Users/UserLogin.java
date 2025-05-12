@@ -7,8 +7,6 @@ import db.DatabaseManager;
 
 public class UserLogin {
 
-
-
     private Connection connection;
 
     public UserLogin() throws SQLException 

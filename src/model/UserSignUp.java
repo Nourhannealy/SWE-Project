@@ -62,5 +62,4 @@ public class UserSignUp extends DatabaseManager{
             preparedStatement.executeUpdate();
         }
     }
-    
 }

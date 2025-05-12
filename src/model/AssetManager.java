@@ -45,5 +45,15 @@ public class AssetManager extends DatabaseManager {
         // Execute query and return ResultSet
         return statement.executeQuery();
     }
+
+    public ResultSet fetchAllAssetNames() throws SQLException 
+    {
+        String sql = "SELECT name FROM assets";
+        
+        PreparedStatement statement = db_connection.prepareStatement(sql);
+
+        // Execute the query and return the ResultSet
+        return statement.executeQuery();
+    }
     
 }

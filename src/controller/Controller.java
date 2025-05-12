@@ -29,6 +29,20 @@ public class Controller {
         this.assetManager = new AssetManager();
     }
 
+    public OwnedAssetsManager getOwnedAssetsManager()
+    {
+        return this.ownedAssetsManager;
+    }
+
+    public AssetManager getAssetManager()
+    {
+        return this.assetManager;
+    }
+
+    public AssetHistoryManager getAssetHistoryManager()
+    {
+        return this.assetHistoryManager;
+    }
 
     public void setUiManager(UIManager manager)
     {
@@ -44,11 +58,10 @@ public class Controller {
     @FXML
     private Button SignUpButton;
 
-     @FXML
+    @FXML
     void SignUpbtnClicked(MouseEvent event) 
     {
         uiManager.switchToSignUp();
     }
-
 
 }
