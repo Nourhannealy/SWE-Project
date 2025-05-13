@@ -12,9 +12,13 @@ public class AssetHistoryManager{
     private Connection db_connection;
     private OwnedAssetsManager ownedAssetsM;
 
-    public AssetHistoryManager() throws SQLException
+    public AssetHistoryManager()
     {
-        this.db_connection = DatabaseManager.connect();
+        try {
+            this.db_connection = DatabaseManager.connect();
+        } catch (SQLException e) {
+            System.out.println("Couldn't open database");
+        }
     }
 
     public void setOwnedAssetsManager(OwnedAssetsManager OAM)
@@ -33,10 +37,6 @@ public class AssetHistoryManager{
         pstmnt1.setString(1, assetName);
         ResultSet rs = pstmnt1.executeQuery();
         
-        if (!rs.next()) 
-        {
-            throw new SQLException("Asset not found: " + assetName);
-        }
         int assetId = rs.getInt("id");
         rs.close();
         pstmnt1.close();

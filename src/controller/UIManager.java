@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import Users.LoginController;
 import Users.signupController;
 import model.AssetManager;
+import transactions.AssetHistoryController;
 import Users.signupController;
 
 import javafx.application.Platform;
@@ -139,6 +140,24 @@ public class UIManager {
         } 
     }
 
+    public void switchToEditRemove()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/transactions.fxml"));
+            Parent root = loader.load();
+            AssetHistoryController assetHistoryCtrl = loader.getController();
+
+            // Switching the view
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch(Exception e)
+        {
+            errorMessage("Transaction Error", "Unable to open transaction window", e);
+        }
+    }
+    
     public void switchToAdd()
     {
 
