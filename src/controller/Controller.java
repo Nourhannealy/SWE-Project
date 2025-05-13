@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import model.AssetManager;
 import model.AssetHistoryManager;
 import model.OwnedAssetsManager;
-
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
@@ -40,6 +40,12 @@ public class Controller extends BaseController{
     private Button SignUpButton;
 
     @FXML
+    private Button zakatBtn;
+
+    @FXML
+    private Button finReportBtn;
+
+    @FXML
     void SignUpbtnClicked(MouseEvent event) 
     {
         uiManager.switchToSignUp();
@@ -49,6 +55,18 @@ public class Controller extends BaseController{
     void logInBtnClicked(MouseEvent event) 
     {
         uiManager.switchToLogIn();
+    }
+
+
+    @FXML
+    void finReportClicked(MouseEvent event) {
+        System.out.println("In the display");
+        uiManager.switchToReport();
+    }
+
+    @FXML
+    void zakatBtnClicked(MouseEvent event) {
+        uiManager.switchToZakat();
     }
 
 }

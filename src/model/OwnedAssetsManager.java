@@ -101,8 +101,12 @@ public class OwnedAssetsManager {
     // Resultset and PreparedStatement need to be closed by caller
     public ResultSet getAllOwnedAssets(int userId) throws SQLException
     {
-        String sql = "SELECT * FROM owned_assets WHERE user_id = ?";
-        PreparedStatement pstmt = db_connection.prepareStatement(sql);
+        // String sql = "SELECT * FROM owned_assets WHERE user_id = ? ";
+        String sql_stmt = "SELECT assets.name, owned_assets.amount, assets.price " +
+             "FROM assets " +
+             "JOIN owned_assets ON owned_assets.asset_id = assets.id " +
+             "WHERE owned_assets.user_id = ?";
+        PreparedStatement pstmt = db_connection.prepareStatement(sql_stmt);
         
         pstmt.setInt(1, userId);
         return pstmt.executeQuery();
@@ -112,6 +116,7 @@ public class OwnedAssetsManager {
     public ResultSet getAllOwnedAssetsNames(int userId) throws SQLException
     {
         String sql = "SELECT name FROM assets WHERE assets.id IN (SELECT asset_id FROM owned_assets WHERE user_id = ?);";
+
         PreparedStatement pstmt = db_connection.prepareStatement(sql);
         
         pstmt.setInt(1, userId);

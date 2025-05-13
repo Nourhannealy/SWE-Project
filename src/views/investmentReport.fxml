@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="mainAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.InvestmentReportController">
+   <children>
+      <Label alignment="CENTER" layoutX="185.0" layoutY="6.0" prefHeight="76.0" prefWidth="229.0" text="Investment Report">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Button fx:id="saveTxtBtn" layoutX="399.0" layoutY="137.0" mnemonicParsing="false" onMouseClicked="#saveTxtBtnClicked" prefHeight="62.0" prefWidth="109.0" text="Save as PDF" />
+      <Button fx:id="saveExcelBtn" layoutX="399.0" layoutY="256.0" mnemonicParsing="false" onMouseClicked="#saveExcelBtnClicked" prefHeight="62.0" prefWidth="109.0" text="Save as Excel" />
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="31.0" mnemonicParsing="false" onMouseClicked="#backBtnClicked" text="Back" />
+      <TextArea fx:id="reportTxt" layoutX="22.0" layoutY="75.0" prefHeight="310.0" prefWidth="329.0" />
+   </children>
+</AnchorPane>

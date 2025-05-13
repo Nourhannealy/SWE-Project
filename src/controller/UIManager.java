@@ -178,7 +178,48 @@ public class UIManager {
         }
         catch(Exception e)
         {
-            errorMessage("Log in Error", "Unable to set controller", e);
+            errorMessage("View Error", "Unable to set controller", e);
         }
     }
+
+    public void switchToZakat()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/zakatCalculator.fxml"));
+            Parent root = loader.load();
+            ZakatCalculatorController rptCtrl = loader.getController();
+
+            // Switching the view
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch(Exception e)
+        {
+            errorMessage("View Error", "Unable to set controller", e);
+        }
+    }
+
+    public void switchToReport()
+    {
+        System.out.println("Prompted to switch ");
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/investmentReport.fxml"));
+            System.out.println("File accessed");
+            Parent root = loader.load();
+            InvestmentReportController rptCtrl = loader.getController();
+            System.out.println("Got controller too !");
+        
+
+            // Switching the view
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch(Exception e)
+        {
+            errorMessage("View Error", "Unable to set controller", e);
+        }
+    }
+
 }
