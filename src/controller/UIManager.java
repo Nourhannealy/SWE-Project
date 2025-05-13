@@ -1,33 +1,43 @@
 package controller;
 
+import db.DatabaseManager;
+import controller.Controller;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import Users.LoginController;
+import Users.signupController;
+import model.AssetManager;
+import Users.signupController;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
-import model.AssetManager;
-import transactions.AssetHistoryController;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import Users.signupController;
-import db.DatabaseManager;
 
 public class UIManager {
-
     private Stage stage;
     private Controller controller;
-    private signupController signupController;
-    private AssetHistoryController assetHistoryController;
+
+    private void errorMessage(String title, String details, Exception e)
+    {
+        Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle(title);
+                alert.setContentText(details);
+                alert.showAndWait();
+                // Close JavaFX application
+                Platform.exit();
+            });
+
+    }
 
     public UIManager(Stage primaryStage)
     {
@@ -42,8 +52,8 @@ public class UIManager {
 
             // Get the controller and inject UIManager or other data
             this.controller = loader.getController();
-            this.controller.setUiManager(this);
-            this.controller.setDatabase();
+            BaseController.setUiManager(this);
+            BaseController.setDatabase();
 
             stage.setScene(new Scene(root));
             stage.setTitle("Investment Manager");
@@ -51,66 +61,7 @@ public class UIManager {
         }
         catch (Exception e)
         {
-            Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Database Error");
-                alert.setContentText("Failed to connect to the database.");
-                alert.showAndWait();
-                // Close JavaFX application
-                Platform.exit();
-            });
-        }
-    }
-
-    public void showSignupView()
-    {
-        try
-        {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/signup.fxml"));
-            Parent root = loader.load();
-
-            this.signupController = loader.getController();
-            
-            stage.setScene(new Scene(root));
-            stage.setTitle("Investment Manager - Signup");
-            stage.show();
-        }
-        catch (Exception e)
-        {
-            Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Database Error");
-                alert.setContentText("Failed to connect to the database.");
-                alert.showAndWait();
-                // Close JavaFX application
-                Platform.exit();
-            });
-        }
-    }
-
-    public void showTransactionsView()
-    {
-        try
-        {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/transactions.fxml"));
-            Parent root = loader.load();
-
-            AssetHistoryController assetHistoryController = loader.getController();
-            
-            stage.setScene(new Scene(root));
-            stage.setTitle("Investment Manager - Transactions");
-            stage.show();
-        }
-        catch (Exception e)
-        {
-            Platform.runLater(() -> {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Database Error");
-                alert.setContentText("Failed to connect to the database.");
-                alert.showAndWait();
-                // Close JavaFX application
-                Platform.exit();
-            });
+            errorMessage("Database error", "Unable to connect to db", e);
         }
     }
 
@@ -133,5 +84,63 @@ public class UIManager {
         assets_name.setItems(items);
     }
 
+    public void switchToSignUp()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/signup.fxml"));
+            Parent root = loader.load();
+            signupController signUpCtrl = loader.getController();
 
+            // Switching the view
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch(Exception e)
+        {
+            errorMessage("Sign Up Error", "Unable to set controller", e);
+        }
+    }
+
+    public void switchToLogIn()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/LOGIN.fxml"));
+            Parent root = loader.load();
+            LoginController loginctrl = loader.getController();
+
+            // Switching the view
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch(Exception e)
+        {
+            errorMessage("Log in Error", "Unable to set controller", e);
+        }
+        
+    }
+
+    public void display()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/menu.fxml"));
+            Parent root = loader.load();
+            MenuController menuCtrl = loader.getController();
+
+            // Switching the view
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch(Exception e)
+        {
+            errorMessage("Display Error", "Unable to set controller", e);
+        } 
+    }
+
+    public void switchToAdd()
+    {
+
+    }
 }

@@ -1,22 +1,21 @@
 package Users;
 
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import controller.BaseController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class LoginController {
+
+public class LoginController extends BaseController {
+
 
     @FXML
-    private Button Login;
+    private Button login;
 
     @FXML
     private PasswordField password;
@@ -25,36 +24,36 @@ public class LoginController {
     private TextField username;
 
     @FXML
-    void submit(ActionEvent event) {
-        String enteredUsername = username.getText();
-        String enteredPassword = password.getText();
+    void Login(ActionEvent event) throws SQLException {
+        try 
+        {
+            String entered_Username=username.getText();
+            String entered_Password=password.getText();
+            UserLogin login = new UserLogin();
+            boolean successfullLogin =login.validataLoginCredentials(entered_Username, entered_Password);
+            
+            Alert alert;
 
-        String url = "jdbc:sqlite:resources/db/system.db"; // Adjust path if needed
+            if(successfullLogin){
+                alert =new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Login Successful");
+                alert.setHeaderText(null);
+                alert.setContentText("Welcome, "+entered_Username+ "!");
 
-        String query = "SELECT password FROM users WHERE username = ?";
 
-        try (Connection conn = DriverManager.getConnection(url);
-            PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-            pstmt.setString(1, enteredUsername);
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                String correctPassword = rs.getString("password");
-
-                if (enteredPassword.equals(correctPassword)) {
-                    System.out.println("Login successful!");
-                    // Optionally: proceed to the next scene or show a success message
-                } else {
-                    System.out.println("Incorrect password.");
-                }
-            } else {
-                System.out.println("Username not found.");
             }
+            else{
+                alert =new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Login Failed");
+                alert.setHeaderText(null);
+                alert.setContentText("Invalid username or password.");
+            }   
 
-        } catch (SQLException e) {
-            System.out.println("Database error: " + e.getMessage());
+            alert.showAndWait();
+        } catch (Exception e) {
+            errorMessage("Database Error", "Couldn't connect/modify db", e);
         }
     }
 
 }
+

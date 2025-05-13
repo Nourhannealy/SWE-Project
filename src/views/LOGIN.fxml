@@ -8,12 +8,10 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Users.LoginController">
    <children>
-      <Label layoutX="148.0" layoutY="173.0" text="username" />
-      <Label layoutX="148.0" layoutY="222.0" prefHeight="17.0" prefWidth="59.0" text="password" />
-      <TextField fx:id="username" layoutX="218.0" layoutY="169.0" promptText="username" />
-      <Button fx:id="Login" layoutX="267.0" layoutY="308.0" mnemonicParsing="false" onAction="#submit" text="Log in" textFill="#225a9f" />
-      <Label layoutX="228.0" layoutY="252.0" prefHeight="17.0" prefWidth="127.0" />
-      <Label layoutX="229.0" layoutY="200.0" prefHeight="17.0" prefWidth="127.0" />
-      <PasswordField fx:id="password" layoutX="218.0" layoutY="226.0" promptText="password" />
+      <Button fx:id="login" layoutX="270.0" layoutY="258.0" mnemonicParsing="false" onAction="#Login" text="Log In" />
+      <Label layoutX="171.0" layoutY="120.0" prefHeight="18.0" prefWidth="63.0" text="Username" />
+      <Label layoutX="171.0" layoutY="167.0" prefHeight="18.0" prefWidth="63.0" text="Password" />
+      <PasswordField fx:id="password" layoutX="270.0" layoutY="164.0" promptText="Password" />
+      <TextField fx:id="username" layoutX="270.0" layoutY="116.0" promptText="Username" />
    </children>
 </AnchorPane>

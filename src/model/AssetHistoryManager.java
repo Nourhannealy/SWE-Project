@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import db.DatabaseManager;
 
-public class AssetHistoryManager {
+public class AssetHistoryManager{
     
     private Connection db_connection;
     private OwnedAssetsManager ownedAssetsM;
@@ -19,6 +19,7 @@ public class AssetHistoryManager {
 
     public void setOwnedAssetsManager(OwnedAssetsManager OAM)
     {
+        System.out.println("setOwnedAssetsManager");
         this.ownedAssetsM = OAM;
     }
     
@@ -89,7 +90,7 @@ public class AssetHistoryManager {
     public ResultSet getAllTransactions(int userId) 
         throws SQLException
     {
-        String allTransactionsQ = "SELECT * FROM asset_history WHERE user_id = ?;";
+        String allTransactionsQ = "SELECT * FROM asset_history WHERE user_id = ?";
 
         PreparedStatement pstmnt = db_connection.prepareStatement(allTransactionsQ);
         ResultSet allTransactions = pstmnt.executeQuery();

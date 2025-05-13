@@ -5,16 +5,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import Users.UserManager;
 import db.DatabaseManager;
 // import UserManager;
 
-public class UserSignUp extends DatabaseManager{
+public class UserSignUp extends UserManager{
     
     private Connection db_connection;
 
     public UserSignUp() throws SQLException
     {
-        this.db_connection = connect();
+        this.db_connection = DatabaseManager.connect();
     }
 
     public boolean validateSignupCredentials(String username, String email, String password, String confirmPassword) 
@@ -41,8 +42,8 @@ public class UserSignUp extends DatabaseManager{
         }
 
 
-        return /*isValidUsername(usernameInput) && isValidPassword(passwordInput)
-            &&*/ !usernameExists && !emailExists && password.equals(confirmPassword);
+        return isValidUsername(username) && isValidPassword(password)
+            && !usernameExists && !emailExists && password.equals(confirmPassword);
 
           
     } 
@@ -51,10 +52,9 @@ public class UserSignUp extends DatabaseManager{
         throws SQLException
     {
         String insertUser = "INSERT INTO users (username, email, password)" +
-                "VALUES (?, ?, ?);";
+                "VALUES (?, ?, ?)";
         
-        try (Connection connection = connect(); // get a fresh connection
-         PreparedStatement preparedStatement = connection.prepareStatement(insertUser)) 
+        try (PreparedStatement preparedStatement = db_connection.prepareStatement(insertUser)) 
         {
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, email);
@@ -62,5 +62,4 @@ public class UserSignUp extends DatabaseManager{
             preparedStatement.executeUpdate();
         }
     }
-    
 }

@@ -6,57 +6,49 @@ import model.AssetManager;
 import model.AssetHistoryManager;
 import model.OwnedAssetsManager;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
-public class Controller {
 
-    protected static UIManager uiManager;
-    protected static OwnedAssetsManager ownedAssetsManager;
-    protected static AssetHistoryManager assetHistoryManager;
-    protected static AssetManager assetManager;
+public class Controller extends BaseController{
 
-    public void setDatabase() throws SQLException
-    {
-        this.ownedAssetsManager = new OwnedAssetsManager();
-        this.assetHistoryManager = new AssetHistoryManager();
-        this.assetManager = new AssetManager();
-    }
 
     public OwnedAssetsManager getOwnedAssetsManager()
     {
-        return this.ownedAssetsManager;
+        return BaseController.ownedAssetsManager;
     }
 
     public AssetManager getAssetManager()
     {
-        return this.assetManager;
+        return BaseController.assetManager;
     }
 
     public AssetHistoryManager getAssetHistoryManager()
     {
-        return this.assetHistoryManager;
+        return BaseController.assetHistoryManager;
     }
 
-    public void setUiManager(UIManager manager)
+    @FXML
+    private Label InvestmentManagerLabel;
+
+    @FXML
+    private Button LogInButton;
+
+    @FXML
+    private Button SignUpButton;
+
+    @FXML
+    void SignUpbtnClicked(MouseEvent event) 
     {
-        this.uiManager = manager;
+        uiManager.switchToSignUp();
     }
 
     @FXML
-    private Label title;
-
-    @FXML
-    private TextField txTitle;
-
-    @FXML
-    void btnClicked(ActionEvent event) {
-        Stage mainWindow = (Stage) txTitle.getScene().getWindow();
-        String title = txTitle.getText();
-        mainWindow.setTitle(title); 
+    void logInBtnClicked(MouseEvent event) 
+    {
+        uiManager.switchToLogIn();
     }
 
 }
