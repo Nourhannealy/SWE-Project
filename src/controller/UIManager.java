@@ -72,21 +72,9 @@ public class UIManager {
 
     public static void populateTransactionTypes(ComboBox<String> transaction_type) 
     {
-        transaction_type.getItems().addAll("Sell", "Buy");
+        transaction_type.getItems().addAll("Edit", "Remove");
     }
 
-    public static void addAssetForm(ComboBox<String> assets_name, ResultSet allAssets)
-        throws SQLException
-    {
-
-        ObservableList<String> items = FXCollections.observableArrayList();
-        while (allAssets.next()) {
-            String item = allAssets.getString("name");
-            items.add(item);
-        }
-
-        assets_name.setItems(items);
-    }
 
     public static void editAssetForm(ComboBox<String> assets_name, ResultSet allAssets)
         throws SQLException
@@ -156,6 +144,24 @@ public class UIManager {
         } 
     }
 
+    public void switchToEditRemove()
+    {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/editRemoveAsset.fxml"));
+            Parent root = loader.load();
+            AssetHistoryController assetHistoryCtrl = loader.getController();
+
+            // Switching the view
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch(Exception e)
+        {
+            errorMessage("Transaction Error", "Unable to open transaction window", e);
+        }
+    }
+    
     public void switchToAdd()
     {
 
