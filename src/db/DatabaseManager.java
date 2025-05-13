@@ -37,7 +37,7 @@ public class DatabaseManager
                 String createTableOwnedAssets = "CREATE TABLE IF NOT EXISTS owned_assets (" +
                                                 "user_id INTEGER, " +
                                                 "asset_id INTEGER, " + 
-                                                "amount INT NOT NULL, " +
+                                                "amount DOUBLE NOT NULL, " +
                                                 "FOREIGN KEY (user_id) REFERENCES users(id), " + 
                                                 "FOREIGN KEY (asset_id) REFERENCES assets(id));";
 
@@ -45,7 +45,7 @@ public class DatabaseManager
                                                     "user_id INTEGER, " + 
                                                     "asset_id INTEGER, " + 
                                                     "transaction_type TEXT, " + 
-                                                    "amount INT," +
+                                                    "amount DOUBLE," +
                                                     "FOREIGN KEY (user_id) REFERENCES users(id)" +
                                                     "FOREIGN KEY (asset_id) REFERENCES assets(id));";
 

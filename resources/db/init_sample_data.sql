@@ -31,7 +31,7 @@ CREATE TABLE assets_history (
     user_id INTEGER,
     asset_id INTEGER,
     transaction_type TEXT CHECK (transaction_type IN ('BUY', 'SELL')),
-    amount INT,
+    amount Double,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (asset_id) REFERENCES assets(id)
 );

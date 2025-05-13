@@ -67,21 +67,9 @@ public class UIManager {
 
     public static void populateTransactionTypes(ComboBox<String> transaction_type) 
     {
-        transaction_type.getItems().addAll("Sell", "Buy");
+        transaction_type.getItems().addAll("Edit", "Remove");
     }
 
-    public static void addAssetForm(ComboBox<String> assets_name, ResultSet allAssets)
-        throws SQLException
-    {
-
-        ObservableList<String> items = FXCollections.observableArrayList();
-        while (allAssets.next()) {
-            String item = allAssets.getString("name");
-            items.add(item);
-        }
-
-        assets_name.setItems(items);
-    }
 
     public static void editAssetForm(ComboBox<String> assets_name, ResultSet allAssets)
         throws SQLException
