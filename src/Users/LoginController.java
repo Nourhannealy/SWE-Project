@@ -35,11 +35,8 @@ public class LoginController extends BaseController {
             Alert alert;
 
             if(successfullLogin){
-                alert =new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Login Successful");
-                alert.setHeaderText(null);
-                alert.setContentText("Welcome, "+entered_Username+ "!");
-
+                uiManager.setUsername(entered_Username);
+                uiManager.display();
 
             }
             else{
@@ -47,9 +44,10 @@ public class LoginController extends BaseController {
                 alert.setTitle("Login Failed");
                 alert.setHeaderText(null);
                 alert.setContentText("Invalid username or password.");
+                alert.showAndWait();
             }   
 
-            alert.showAndWait();
+            
         } catch (Exception e) {
             errorMessage("Database Error", "Couldn't connect/modify db", e);
         }

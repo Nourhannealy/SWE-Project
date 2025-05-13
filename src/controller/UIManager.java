@@ -39,6 +39,11 @@ public class UIManager {
 
     }
 
+    public void setUsername(String name)
+    {
+        BaseController.setUsername(name);
+    }
+
     public UIManager(Stage primaryStage)
     {
         this.stage = primaryStage;

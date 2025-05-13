@@ -20,6 +20,12 @@ public class MenuController extends BaseController{
     private Label hiTxt;
 
     @FXML
+    private void initialize()
+    {
+        hiTxt.setText("Hi " + username + '!');
+    }
+
+    @FXML
     private Label message;
 
     @FXML

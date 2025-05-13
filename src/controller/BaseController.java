@@ -14,6 +14,12 @@ public class BaseController {
     protected static OwnedAssetsManager ownedAssetsManager;
     protected static AssetHistoryManager assetHistoryManager;
     protected static AssetManager assetManager;
+    protected static String username;
+
+    public static void setUsername(String user)
+    {
+        username = user;
+    }
 
     public static void setDatabase() throws SQLException
     {

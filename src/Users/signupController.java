@@ -59,6 +59,8 @@ public class signupController extends BaseController {
                 message.setStyle("-fx-text-fill: green;");
                 message.setText("Signed up successfully");
                 System.out.println("Validation done !!");
+                uiManager.setUsername(usernameInput);
+                uiManager.display();
             }
             else
             {
