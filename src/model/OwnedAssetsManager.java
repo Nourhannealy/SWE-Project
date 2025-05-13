@@ -66,6 +66,23 @@ public class OwnedAssetsManager {
     {
         String sql_Update = "UPDATE owned_assets SET amount = ? WHERE user_id = ? AND asset_id = ?";
 
+        String sql_check = "SELECT amount FROM owned_assets WHERE user_id = ? AND asset_id = ? ";
+        try (PreparedStatement stmt = db_connection.prepareStatement(sql_check))
+        {
+            stmt.setInt(1, userId);
+            stmt.setInt(2, assetId);
+            try(ResultSet res = stmt.executeQuery())
+            {
+                if (res.next())
+                {
+                    if (res.getDouble("amount") == amount)
+                    {
+                        throw new SQLException("This is your current owned amount");
+                    }
+                }
+            }
+        }
+        
         try (PreparedStatement pstmt = db_connection.prepareStatement(sql_Update)) 
         {
             pstmt.setDouble(1, amount);

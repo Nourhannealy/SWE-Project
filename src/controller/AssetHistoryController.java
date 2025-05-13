@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
+import javafx.scene.input.MouseEvent;
 
 public class AssetHistoryController extends Controller{
 
@@ -23,7 +25,7 @@ public class AssetHistoryController extends Controller{
     private ComboBox<String> assets_name;
 
     @FXML
-    private Button back_btn;
+    private Button backBtn;
 
     @FXML
     private Button confirm_transaction;
@@ -44,7 +46,7 @@ public class AssetHistoryController extends Controller{
             amount.setVisible(false);
             message.setAlignment(Pos.CENTER);
             
-            ResultSet allOwnedAssets = ownedAssetsManager.getAllOwnedAssetsNames(1);
+            ResultSet allOwnedAssets = ownedAssetsManager.getAllOwnedAssetsNames(userId);
             UIManager.editAssetForm(assets_name, allOwnedAssets);
 
         } 
@@ -95,15 +97,17 @@ public class AssetHistoryController extends Controller{
             }
             
             assetHistoryManager.setOwnedAssetsManager(ownedAssetsManager);
-            assetHistoryManager.addTransaction(1, asset_name_input, "", amount_input);
+            assetHistoryManager.addTransaction(userId, asset_name_input, "", amount_input);
+            message.setTextFill(Color.GREEN);
             message.setText("Transaction completed successfully");
                         
-            ResultSet allOwnedAssets = ownedAssetsManager.getAllOwnedAssetsNames(1);
+            ResultSet allOwnedAssets = ownedAssetsManager.getAllOwnedAssetsNames(userId);
             UIManager.editAssetForm(assets_name, allOwnedAssets);
             
         } 
         catch (SQLException e) 
         {
+            message.setTextFill(Color.RED);
             message.setText("Couldn't complete the transaction !");
         }
     }
@@ -122,6 +126,12 @@ public class AssetHistoryController extends Controller{
             amount.setVisible(false);
             amount_label.setVisible(false);
         }
+    }
+
+    @FXML
+    void backBtnClicked(MouseEvent event) {
+        uiManager.display();
+
     }
 
 }

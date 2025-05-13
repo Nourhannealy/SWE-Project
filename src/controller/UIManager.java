@@ -166,6 +166,19 @@ public class UIManager {
     
     public void switchToAdd()
     {
+        try
+        {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/addAsset.fxml"));
+            Parent root = loader.load();
+            AddAssetController addCtrl = loader.getController();
 
+            // Switching the view
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch(Exception e)
+        {
+            errorMessage("Log in Error", "Unable to set controller", e);
+        }
     }
 }

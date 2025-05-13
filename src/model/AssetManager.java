@@ -22,7 +22,7 @@ public class AssetManager {
     // Caller must close pstmt and resultset
     public ResultSet fetchAsset(int AssetId) throws SQLException
     {
-        String sql = "SELECT * FROM asset WHERE id = ?";
+        String sql = "SELECT * FROM assets WHERE id = ?";
         PreparedStatement stmt = db_connection.prepareStatement(sql);
         stmt.setInt(1, AssetId);
         return stmt.executeQuery();
@@ -54,6 +54,25 @@ public class AssetManager {
 
         // Execute the query and return the ResultSet
         return statement.executeQuery();
+    }
+
+    public ResultSet fetchAllAssetNames(String type) throws SQLException
+    {
+        String sql = "SELECT name FROM assets WHERE type = ?";
+        PreparedStatement stmt = db_connection.prepareStatement(sql);
+
+        stmt.setString(1, type);
+        return stmt.executeQuery();
+    }
+
+    public ResultSet fetchAllAssetTypes() throws SQLException
+    {
+        String sql = "SELECT DISTINCT type FROM assets";
+        PreparedStatement statement = db_connection.prepareStatement(sql);
+
+        // Execute the query and return the ResultSet
+        return statement.executeQuery();
+
     }
     
 }

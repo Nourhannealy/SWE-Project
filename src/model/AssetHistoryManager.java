@@ -41,35 +41,51 @@ public class AssetHistoryManager{
         rs.close();
         pstmnt1.close();
 
-        String checkAmountQ = "SELECT amount FROM owned_assets WHERE user_id = ? AND asset_id = ?";
-        PreparedStatement checkStmt = db_connection.prepareStatement(checkAmountQ);
-        checkStmt.setInt(1, userId);
-        checkStmt.setInt(2, assetId);
-        ResultSet checkRs = checkStmt.executeQuery();
-        
-        checkRs.next(); 
-        double currentAmount = checkRs.getDouble("amount");
-        checkRs.close();
-        checkStmt.close();
+        if(ownedAssetsM.isAssetOwned(userId, assetId) == false)
+        {
+            if (transactionType == "SELL")
+            {
+                throw new SQLException("Asset is not owned");
+            }
+            else
+            {
+                ownedAssetsM.addAsset(userId, assetId, amount);
+            }
+        }
+        else
+        // Detemine transaction type
+        {
+            
+            String checkAmountQ = "SELECT amount FROM owned_assets WHERE user_id = ? AND asset_id = ?";
+            PreparedStatement checkStmt = db_connection.prepareStatement(checkAmountQ);
+            checkStmt.setInt(1, userId);
+            checkStmt.setInt(2, assetId);
+            ResultSet checkRs = checkStmt.executeQuery();
+            
+            checkRs.next(); 
+            double currentAmount = checkRs.getDouble("amount");
+            checkRs.close();
+            checkStmt.close();
 
-        if (amount == 0) // Remove
-        {
-            transactionType = "SELL";
-            ownedAssetsM.deleteAsset(userId, assetId);
-        }
-        else if (amount == currentAmount)
-        {
-            throw new SQLException("This is your current amount already!");
-        }
-        else if (currentAmount < amount) // Buy
-        {
-            transactionType = "BUY";
-            ownedAssetsM.editAsset(userId, assetId, amount);
-        }
-        else if (currentAmount > amount)
-        {
-            transactionType = "SELL";
-            ownedAssetsM.editAsset(userId, assetId, amount);
+            if (amount == 0) // Remove
+            {
+                transactionType = "SELL";
+                ownedAssetsM.deleteAsset(userId, assetId);
+            }
+            // else if (amount == currentAmount)
+            // {
+            //     throw new SQLException("This is your current amount already!");
+            // }
+            else if (currentAmount < amount) // Buy
+            {
+                transactionType = "BUY";
+                ownedAssetsM.editAsset(userId, assetId, amount);
+            }
+            else if (currentAmount > amount)
+            {
+                transactionType = "SELL";
+                ownedAssetsM.editAsset(userId, assetId, amount);
+            }
         }
 
 
