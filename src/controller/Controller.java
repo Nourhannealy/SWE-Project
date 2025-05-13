@@ -14,10 +14,10 @@ import javafx.stage.Stage;
 
 public class Controller {
 
-    private UIManager uiManager;
-    private OwnedAssetsManager ownedAssetsManager;
-    private AssetHistoryManager assetHistoryManager;
-    private AssetManager assetManager;
+    protected static UIManager uiManager;
+    protected static OwnedAssetsManager ownedAssetsManager;
+    protected static AssetHistoryManager assetHistoryManager;
+    protected static AssetManager assetManager;
 
     public void setDatabase() throws SQLException
     {

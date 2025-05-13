@@ -18,7 +18,7 @@ public class OwnedAssetsManager extends DatabaseManager {
 
     public boolean isAssetOwned(int userId, int assetId) throws SQLException
     {
-        String sql = "SELECT 1 FROM owned_assets WHERE userId = ? AND assetId = ?";
+        String sql = "SELECT 1 FROM owned_assets WHERE user_id = ? AND asset_id = ?";
 
         try (PreparedStatement pstmt = db_connection.prepareStatement(sql)) 
         {

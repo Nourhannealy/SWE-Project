@@ -9,25 +9,25 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="transactions.AssetHistoryController">
    <children>
-      <ComboBox fx:id="transaction_type" layoutX="251.0" layoutY="91.0" onAction="#populate_assets" prefWidth="150.0" />
-      <Label layoutX="105.0" layoutY="91.0" text="Transaction type:">
+      <ComboBox fx:id="transaction_type" layoutX="285.0" layoutY="132.0" onAction="#add_remove_asset_action" prefWidth="150.0" />
+      <Label layoutX="105.0" layoutY="132.0" text="Transaction type:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Label layoutX="105.0" layoutY="145.0" text="Assets:">
+      <Label layoutX="105.0" layoutY="56.0" text="Assets:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <ComboBox fx:id="assets_name" layoutX="251.0" layoutY="145.0" prefWidth="150.0" />
-      <Label layoutX="105.0" layoutY="212.0" text="New amount:">
+      <ComboBox fx:id="assets_name" layoutX="285.0" layoutY="56.0" prefWidth="150.0" />
+      <Label fx:id="amount_label" layoutX="105.0" layoutY="212.0" text="New amount:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="amount" layoutX="251.0" layoutY="212.0" />
-      <Button fx:id="confirm_transaction" layoutX="240.0" layoutY="339.0" mnemonicParsing="false" onAction="#addTransaction" text="Confirm transaction" />
-      <Label fx:id="message" layoutX="184.0" layoutY="296.0" prefHeight="18.0" prefWidth="206.0" />
+      <TextField fx:id="amount" layoutX="285.0" layoutY="212.0" onAction="#edit_action" />
+      <Button fx:id="confirm_transaction" layoutX="240.0" layoutY="341.0" mnemonicParsing="false" onAction="#addTransaction" text="Confirm transaction" />
+      <Label fx:id="message" layoutX="49.0" layoutY="295.0" prefHeight="18.0" prefWidth="507.0" />
    </children>
 </AnchorPane>

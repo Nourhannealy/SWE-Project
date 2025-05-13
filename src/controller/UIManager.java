@@ -95,10 +95,7 @@ public class UIManager {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/transactions.fxml"));
             Parent root = loader.load();
 
-            this.assetHistoryController = loader.getController();
-            this.assetHistoryController.setAssetManager(controller.getAssetManager());
-            this.assetHistoryController.setOwnedAssetManager(controller.getOwnedAssetsManager());
-            this.assetHistoryController.setAssetHistoryManager(controller.getAssetHistoryManager());
+            AssetHistoryController assetHistoryController = loader.getController();
             
             stage.setScene(new Scene(root));
             stage.setTitle("Investment Manager - Transactions");
@@ -119,21 +116,9 @@ public class UIManager {
 
     public static void populateTransactionTypes(ComboBox<String> transaction_type) 
     {
-        transaction_type.getItems().addAll("Sell", "Buy");
+        transaction_type.getItems().addAll("Edit", "Remove");
     }
 
-    public static void addAssetForm(ComboBox<String> assets_name, ResultSet allAssets)
-        throws SQLException
-    {
-
-        ObservableList<String> items = FXCollections.observableArrayList();
-        while (allAssets.next()) {
-            String item = allAssets.getString("name");
-            items.add(item);
-        }
-
-        assets_name.setItems(items);
-    }
 
     public static void editAssetForm(ComboBox<String> assets_name, ResultSet allAssets)
         throws SQLException
