@@ -1,10 +1,8 @@
-package transactions;
+package controller;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import controller.Controller;
-import controller.UIManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -12,7 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import model.OwnedAssetsManager;
 
 public class AssetHistoryController extends Controller{
 
@@ -56,6 +53,7 @@ public class AssetHistoryController extends Controller{
             message.setText("Error loading assets");
         }
     }
+
 
     @FXML
     void addTransaction(ActionEvent event) {
