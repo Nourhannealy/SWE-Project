@@ -140,7 +140,9 @@ public class UIManager {
         }
         catch(Exception e)
         {
-            errorMessage("Display Error", "Unable to set controller", e);
+            errorMessage("Display Error", "Unable to set menu controller", e);
+            System.out.println("Menu controller stack: ");
+            e.printStackTrace();
         } 
     }
 

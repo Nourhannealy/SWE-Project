@@ -38,7 +38,7 @@ public class MenuController extends BaseController{
 
     @FXML
     void editAssetBtnClicked(MouseEvent event) {
-
+        uiManager.switchToEditRemove();
     }
 
     @FXML

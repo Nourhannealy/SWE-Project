@@ -20,7 +20,6 @@ public class App extends Application {
         try {
             UIManager uiManager = new UIManager(primaryStage);
             uiManager.showMainView();
-            uiManager.switchToEditRemove();
 
         } catch (Exception e) {
             System.err.println("Error: " + e);
