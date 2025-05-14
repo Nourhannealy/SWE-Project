@@ -26,6 +26,38 @@ public class AssetHistoryManager{
         System.out.println("setOwnedAssetsManager");
         this.ownedAssetsM = OAM;
     }
+
+    public void addBuyTransaction(int userId, String assetName, String transactionType, double amount)
+        throws SQLException
+    {
+        int assetId = ownedAssetsM.getAssetId(assetName);
+
+        // Updating the ownedAssets accordingly
+        if(ownedAssetsM.isAssetOwned(userId, assetId) == false)
+        {
+            ownedAssetsM.addAsset(userId, assetId, amount);
+            
+        }
+        else
+        {
+            double owned = ownedAssetsM.getAssetOwnedAmount(userId, assetId);
+            ownedAssetsM.editAsset(userId, assetId, amount + owned);
+        }
+
+
+        // Add the transaction history
+        String addTransaction = "INSERT INTO assets_history (user_id, asset_id, transaction_type, amount)" + 
+                                "VALUES (?, ?, ?, ?);";
+        PreparedStatement pstmnt2 = db_connection.prepareStatement(addTransaction);
+        pstmnt2.setInt(1, userId);
+        pstmnt2.setInt(2, assetId);
+        pstmnt2.setString(3, transactionType);
+        pstmnt2.setDouble(4, amount);
+
+        pstmnt2.executeUpdate();
+        pstmnt2.close();
+
+    }
     
  
     public void addTransaction(int userId, String assetName, String transactionType, double amount)

@@ -87,7 +87,7 @@ public class AddAssetController extends BaseController{
                 if (amount <= 0) 
                     throw new NumberFormatException();
 
-                assetHistoryManager.addTransaction(userId, assetNameMenu.getValue(), "BUY", amount);
+                assetHistoryManager.addBuyTransaction(userId, assetNameMenu.getValue(), "BUY", amount);
                 message.setTextFill(Color.GREEN);
                 message.setText("Asset added Successfully!");
 
