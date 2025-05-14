@@ -56,7 +56,6 @@ public class AssetHistoryController extends Controller{
         }
     }
 
-
     @FXML
     void addTransaction(ActionEvent event) {
         try 
@@ -79,7 +78,6 @@ public class AssetHistoryController extends Controller{
                     return;
                 }
 
-                
                 try 
                 {
                     amount_input = Double.parseDouble(amount.getText());
@@ -103,6 +101,8 @@ public class AssetHistoryController extends Controller{
                         
             ResultSet allOwnedAssets = ownedAssetsManager.getAllOwnedAssetsNames(userId);
             UIManager.editAssetForm(assets_name, allOwnedAssets);
+            amount.clear();
+            displayOwnedAmount(event);
             
         } 
         catch (SQLException e) 
@@ -115,9 +115,10 @@ public class AssetHistoryController extends Controller{
     @FXML
     void add_remove_asset_action(ActionEvent event) {
         String transaction_type_input = transaction_type.getValue();
-
+        
         if (transaction_type_input.equals("Edit"))
         {
+            displayOwnedAmount(event);
             amount.setVisible(true);
             amount_label.setVisible(true);
         }
@@ -132,6 +133,24 @@ public class AssetHistoryController extends Controller{
     void backBtnClicked(MouseEvent event) {
         uiManager.display();
 
+    }
+
+    @FXML
+    void displayOwnedAmount(ActionEvent event) {
+        String asset_name_input = assets_name.getValue();
+        String transaction_type_input = transaction_type.getValue();
+
+        if (asset_name_input != null && transaction_type_input != null)
+        {
+            try {
+                int assetId = ownedAssetsManager.getAssetId(asset_name_input);
+                double currentAmount = ownedAssetsManager.getAssetOwnedAmount(userId, assetId);
+
+                amount.setPromptText("Cuurently owned amount: " + currentAmount);
+            } catch (SQLException e) {
+                
+            }    
+        }
     }
 
 }

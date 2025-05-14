@@ -14,22 +14,6 @@ import javafx.scene.input.MouseEvent;
 
 public class Controller extends BaseController{
 
-
-    public OwnedAssetsManager getOwnedAssetsManager()
-    {
-        return BaseController.ownedAssetsManager;
-    }
-
-    public AssetManager getAssetManager()
-    {
-        return BaseController.assetManager;
-    }
-
-    public AssetHistoryManager getAssetHistoryManager()
-    {
-        return BaseController.assetHistoryManager;
-    }
-
     @FXML
     private Label InvestmentManagerLabel;
 

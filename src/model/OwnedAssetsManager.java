@@ -135,6 +135,39 @@ public class OwnedAssetsManager {
             }
         }
 
-    }        
+    }  
+    
+    public int getAssetId(String assetName)
+        throws SQLException
+    {
+        String assetIdQ = "SELECT id FROM assets WHERE name = ?;" ;
+
+        PreparedStatement pstmnt1 = db_connection.prepareStatement(assetIdQ);
+        pstmnt1.setString(1, assetName);
+        ResultSet rs = pstmnt1.executeQuery();
+        
+        int assetId = rs.getInt("id");
+        rs.close();
+        pstmnt1.close();
+
+        return assetId;
+    }
+
+    public double getAssetOwnedAmount(int userId, int assetId) 
+        throws SQLException
+    {
+        String checkAmountQ = "SELECT amount FROM owned_assets WHERE user_id = ? AND asset_id = ?";
+        PreparedStatement checkStmt = db_connection.prepareStatement(checkAmountQ);
+        checkStmt.setInt(1, userId);
+        checkStmt.setInt(2, assetId);
+        ResultSet checkRs = checkStmt.executeQuery();
+        
+        checkRs.next(); 
+        double currentAmount = checkRs.getDouble("amount");
+        checkRs.close();
+        checkStmt.close();
+
+        return currentAmount;
+    }
 }
     

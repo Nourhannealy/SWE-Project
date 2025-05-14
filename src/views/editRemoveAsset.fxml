@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AssetHistoryController">
    <children>
-      <ComboBox fx:id="transaction_type" layoutX="306.0" layoutY="168.0" onAction="#add_remove_asset_action" prefWidth="150.0" />
+      <ComboBox fx:id="transaction_type" layoutX="306.0" layoutY="168.0" onAction="#add_remove_asset_action" prefHeight="26.0" prefWidth="211.0" />
       <Label layoutX="124.0" layoutY="168.0" text="Transaction type:">
          <font>
             <Font size="16.0" />
@@ -20,13 +20,13 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <ComboBox fx:id="assets_name" layoutX="306.0" layoutY="125.0" prefWidth="150.0" />
+      <ComboBox fx:id="assets_name" layoutX="306.0" layoutY="125.0" onAction="#displayOwnedAmount" prefHeight="26.0" prefWidth="211.0" />
       <Label fx:id="amount_label" layoutX="124.0" layoutY="213.0" text="New amount:">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="amount" layoutX="306.0" layoutY="213.0" />
+      <TextField fx:id="amount" layoutX="306.0" layoutY="213.0" prefHeight="26.0" prefWidth="211.0" />
       <Button fx:id="confirm_transaction" layoutX="239.0" layoutY="335.0" mnemonicParsing="false" onAction="#addTransaction" text="Confirm transaction" />
       <Label fx:id="message" layoutX="34.0" layoutY="296.0" prefHeight="18.0" prefWidth="532.0" />
       <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#backBtnClicked" text="Back" textAlignment="CENTER" />
