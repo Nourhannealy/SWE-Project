@@ -41,11 +41,24 @@ public class UserSignUp extends UserManager{
             }
         }
 
+        if (!isValidUsername(username))
+            throw new SQLException("Username should be at least 4 characters long.");
+
+        if (usernameExists)
+            throw new SQLException("Username already exists");
+        
+        if (emailExists)
+            throw new SQLException("Email already exists");
+
+        if (!password.equals(confirmPassword))
+            throw new SQLException("Passwords don't match");
+
+        if (!isValidPassword(password))
+            throw new SQLException("Password should be at least 8 characters long.");
 
         return isValidUsername(username) && isValidPassword(password)
             && !usernameExists && !emailExists && password.equals(confirmPassword);
-
-          
+     
     } 
 
     public void savaUserCredentials(String username, String email, String password)

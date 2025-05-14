@@ -6,16 +6,13 @@ import java.sql.SQLException;
 public class ZakatCalculator {
 
     // Example: 2.5% zakat on total value
-    public static double calculateZakat(ResultSet assets, double[] amount) throws SQLException
+    public double calculateZakat(ResultSet assets) throws SQLException
     {
         double assetsValue = 0;
-        int i = 0;
         while (assets.next())
         {
-            assetsValue  += assets.getDouble("price") * amount[i];
-            i++;
+            assetsValue += assets.getDouble("amount") * assets.getDouble("price");
         }
-
         return assetsValue * 0.025;
     }
 

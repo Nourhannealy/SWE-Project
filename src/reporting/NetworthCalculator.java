@@ -9,12 +9,12 @@ import java.util.List;
 
 public class NetworthCalculator {
     
-    public double calculateNetworth(List<Pair<Double, Double>> assets) throws SQLException
+    public double calculateNetworth(ResultSet assets) throws SQLException
     {
         double worth = 0;
-        for (Pair<Double, Double> asset : assets)
+        while (assets.next())
         {
-            worth += asset.getKey() + asset.getValue();
+            worth += assets.getDouble("amount") * assets.getDouble("price");
         }
 
         return worth;

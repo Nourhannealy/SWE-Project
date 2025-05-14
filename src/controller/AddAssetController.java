@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -62,7 +63,7 @@ public class AddAssetController extends BaseController{
             }
 
             assetNameMenu.setPromptText("Choose a category first");
-
+            message.setAlignment(Pos.CENTER);
 
         } catch (Exception e) {
             errorMessage("Database Error", "Couldn't get data from the db", e);
@@ -83,13 +84,17 @@ public class AddAssetController extends BaseController{
             try
             {
                 double amount = Double.parseDouble(amountIn.getText());
+                if (amount <= 0) 
+                    throw new NumberFormatException();
+
                 assetHistoryManager.addTransaction(userId, assetNameMenu.getValue(), "BUY", amount);
                 message.setTextFill(Color.GREEN);
                 message.setText("Asset added Successfully!");
 
 
             } catch (NumberFormatException  e) {
-                message.setText("You must enter a mumeric value");
+                message.setTextFill(Color.RED);
+                message.setText("You must enter a positive mumeric value");
             } catch (Exception e) {
                 e.printStackTrace();
                 errorMessage("Database Error", "Couldn't get data from the db", e);

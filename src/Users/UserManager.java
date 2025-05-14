@@ -18,7 +18,7 @@ public class UserManager {
 
     protected boolean isValidUsername(String username)
     {
-        if(username.length() < 4 || username == "")
+        if(username.length() < 3 || username == "")
         {
             return false;
         }

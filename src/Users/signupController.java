@@ -61,11 +61,10 @@ public class signupController extends BaseController {
                 uiManager.setUsername(usernameInput);
                 uiManager.display();
             }
-            else
-            {
-                message.setText("Signup failed: username or email may already be in use, or passwords do not match.");
-            }
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            message.setText(e.getMessage());
+        }
+        catch (Exception e) {
             errorMessage("Database Error", "Couldn't connect/edit the db", e);
         }
 

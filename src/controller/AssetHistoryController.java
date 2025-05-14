@@ -45,6 +45,7 @@ public class AssetHistoryController extends Controller{
             amount_label.setVisible(false);
             amount.setVisible(false);
             message.setAlignment(Pos.CENTER);
+            message.setTextFill(Color.RED);
             
             ResultSet allOwnedAssets = ownedAssetsManager.getAllOwnedAssetsNames(userId);
             UIManager.editAssetForm(assets_name, allOwnedAssets);
@@ -83,13 +84,12 @@ public class AssetHistoryController extends Controller{
                     amount_input = Double.parseDouble(amount.getText());
                     if (amount_input < 0) 
                     {
-                        message.setText("Amount cannot be negative");
+                        message.setText("Please enter a valid positive number for amount.");
                         return;
                     }
                 } 
                 catch (NumberFormatException e) 
                 {
-                    message.setText("Please enter a valid number for amount");
                     return;
                 }
             }

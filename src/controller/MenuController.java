@@ -43,12 +43,12 @@ public class MenuController extends BaseController{
 
     @FXML
     void finReportClicked(MouseEvent event) {
-
+        uiManager.switchToReport();
     }
 
     @FXML
     void zakatBtnClicked(MouseEvent event) {
-
+        uiManager.switchToZakat();
     }
 
 }
